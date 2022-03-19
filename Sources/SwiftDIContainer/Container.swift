@@ -29,6 +29,10 @@ private final class DependencyStorage {
         scopedInstances[ObjectIdentifier(scope)]![ObjectIdentifier(T.self)] = value
     }
 
+    func setSharedInstance<T>(_ value: T, scope: Container) {
+        sharedInstances[ObjectIdentifier(scope)] = value
+    }
+
     func retrieveScopedInstance<T>(scope: Container) -> T? {
         scopedInstances[ObjectIdentifier(scope)]?[ObjectIdentifier(T.self)] as? T
     }
@@ -116,7 +120,7 @@ final class Container {
     private func storeValue<T>(_ value: T, forScope scope: DependencyScope) {
         switch scope {
         case .shared:
-            storage.sharedInstances[ObjectIdentifier(T.self)] = value
+            storage.setSharedInstance(value, scope: self)
         case .scoped:
             storage.setScopedInstance(value, scope: self)
         case .transient:
