@@ -1,6 +1,6 @@
 # SwiftDIContainer
 
-A very basic DI Container with factory methods.
+A very basic DI Container with factory methods inspired by Swinject.
 
 Supports three dependency scopes: shared (across all containers), transient (created dependencies are not stored) and scoped (dependencies created in a sub-container are not visible in the parent containers).
 
